@@ -6,6 +6,8 @@ history, and can send alerts to your phone.
 
 ![The overview page](docs/images/overview.png)
 
+![The GPU page (currently only nvidia GPUs supported](docs/images/gpus.png)
+
 ## What you get
 
 - Decode and prefill speed for every request, with latency, context depth and
