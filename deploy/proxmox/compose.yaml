@@ -1,0 +1,22 @@
+# The dashboard in its own Proxmox container, built from the checkout that
+# deploy/proxmox/install.sh ships in. The agent runs on the Proxmox host.
+name: inferenceinquire
+
+services:
+  dashboard:
+    build: ./app
+    image: inferenceinquire:local
+    container_name: inferenceinquire
+    restart: unless-stopped
+    # The container's port 80; the LAN reaches it directly.
+    ports:
+      - "${PORT:-80}:8000"
+    env_file: .env
+    volumes:
+      - ./data:/data
+    stop_grace_period: 8s
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"

@@ -1,0 +1,69 @@
+# InferenceInquire on one Linux machine: the dashboard, and the agent that
+# reads the GPUs, the host and llama.cpp's log.
+#
+#   docker compose up -d          then open http://<this machine>:8000
+#
+# The agent finds llama.cpp by itself: a container that runs llama-server, or
+# a llama* systemd unit. Settings go in a .env file next to this one (see
+# .env.example); none are required.
+#
+# Both services share the host's network, so the dashboard reaches a
+# llama-server that listens on 127.0.0.1, and the agent listens on 127.0.0.1
+# only. The dashboard alone, without the agent: `docker compose up -d dashboard`.
+
+name: inferenceinquire
+
+services:
+  dashboard:
+    image: ghcr.io/nisesen/inferenceinquire:${TAG:-0.1}
+    build: ./app
+    restart: unless-stopped
+    network_mode: host
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      PORT: ${PORT:-8000}
+      AGENT_URL: http://127.0.0.1:${AGENT_PORT:-9101}
+      # Created on first start and shared with the agent through the volume.
+      AGENT_TOKEN_FILE: /token/agent-token
+    volumes:
+      - data:/data
+      - token:/token
+    read_only: true
+    tmpfs: [/tmp]
+    security_opt: [no-new-privileges:true]
+    stop_grace_period: 8s
+
+  agent:
+    image: ghcr.io/nisesen/inferenceinquire-agent:${TAG:-0.1}
+    build: ./agent
+    restart: unless-stopped
+    network_mode: host
+    # The host's processes: which containers and units are running, the GPUs'
+    # processes, and the model file each server has open.
+    pid: host
+    # NVIDIA GPUs, through the NVIDIA Container Toolkit. Without one, delete
+    # this line: host and llama.cpp telemetry still work.
+    gpus: all
+    # The kernel log, where the driver reports GPU faults (Xid).
+    cap_add: [SYSLOG]
+    environment:
+      AGENT_HOST: 127.0.0.1
+      AGENT_PORT: ${AGENT_PORT:-9101}
+      AGENT_TOKEN_FILE: /token/agent-token
+    volumes:
+      - token:/token:ro
+      # To find llama.cpp containers and follow their logs. The agent only
+      # reads (GET requests), but the socket itself is not read-only: put a
+      # socket proxy that allows GET /containers in front of it if you need
+      # that guarantee.
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    # The BMC's sensors and event log, on boards that have one:
+    # devices: [/dev/ipmi0]
+    read_only: true
+    security_opt: [no-new-privileges:true]
+
+volumes:
+  data:
+  token:

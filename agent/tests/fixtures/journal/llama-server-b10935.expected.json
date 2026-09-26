@@ -1,0 +1,98 @@
+{
+ "matched": {
+  "auth_fail": 6,
+  "cache_evict": 2,
+  "cache_skip": 2,
+  "cancel": 2,
+  "tg": 2,
+  "prompt": 4,
+  "eval": 4,
+  "total": 4,
+  "draft": 6,
+  "graphs": 4,
+  "launch": 4,
+  "release": 4,
+  "pick_lcp": 5,
+  "pick_lru": 2,
+  "loading": 2,
+  "loaded": 2,
+  "oom": 0
+ },
+ "requests": [
+  {
+   "task": 472563,
+   "slot": 0,
+   "prompt_tokens": 4,
+   "prefill_tps": 18.36,
+   "gen_tokens": 48,
+   "decode_tps": 70.11,
+   "accept_rate": 0.84615,
+   "n_tokens": 73,
+   "wall_s": 0.8880558013916016,
+   "pick": {
+    "how": "cache",
+    "similarity": 1.0,
+    "keep": 0.356
+   }
+  },
+  {
+   "task": 472217,
+   "slot": 0,
+   "prompt_tokens": 4,
+   "prefill_tps": 18.4,
+   "gen_tokens": 48,
+   "decode_tps": 69.83,
+   "accept_rate": 0.84615,
+   "n_tokens": 73,
+   "wall_s": 0.8904070854187012,
+   "pick": {
+    "how": "cache",
+    "similarity": 1.0,
+    "keep": 0.356
+   }
+  },
+  {
+   "task": 471871,
+   "slot": 0,
+   "prompt_tokens": 4,
+   "prefill_tps": 17.24,
+   "gen_tokens": 48,
+   "decode_tps": 69.79,
+   "accept_rate": 0.84615,
+   "n_tokens": 73,
+   "wall_s": 0.906203031539917,
+   "pick": {
+    "how": "cache",
+    "similarity": 1.0,
+    "keep": 0.356
+   }
+  },
+  {
+   "task": 471529,
+   "slot": 0,
+   "prompt_tokens": 4,
+   "prefill_tps": 17.34,
+   "gen_tokens": 48,
+   "decode_tps": 70.1,
+   "accept_rate": 0.84615,
+   "n_tokens": 73,
+   "wall_s": 6.477765798568726,
+   "pick": {
+    "how": "cache",
+    "similarity": 1.0,
+    "keep": 0.356
+   }
+  }
+ ],
+ "counters": {
+  "auth_fail": 6,
+  "cache_evict": 2,
+  "cache_evict_mib": 865.761,
+  "cache_skip": 2,
+  "cancel": 2
+ },
+ "load": {
+  "state": "loaded",
+  "path": "/opt/models/Qwen3.8-27B-UD-Q8_K_XL.gguf"
+ }
+}

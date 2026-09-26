@@ -1,0 +1,17 @@
+[Unit]
+Description=InferenceInquire dashboard (docker compose)
+Documentation=https://github.com/nisesen/inferenceinquire
+Requires=docker.service
+After=docker.service network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+WorkingDirectory=/opt/inferenceinquire
+ExecStart=/usr/bin/docker compose up -d --remove-orphans
+ExecStop=/usr/bin/docker compose stop
+TimeoutStartSec=600
+
+[Install]
+WantedBy=multi-user.target

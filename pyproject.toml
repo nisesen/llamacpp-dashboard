@@ -1,0 +1,34 @@
+# Tool configuration only. The dashboard ships as a container image (app/)
+# and the agent as a single file (agent/); neither is installed with pip.
+
+[tool.ruff]
+line-length = 100
+# The agent runs on the host's own python3, so hold every file to the oldest
+# interpreter it supports.
+target-version = "py311"
+extend-exclude = ["app/static"]
+
+[tool.ruff.lint]
+select = [
+  "E", "W",   # pycodestyle
+  "F",        # pyflakes
+  "I",        # import order
+  "B",        # bugbear
+  "UP",       # pyupgrade
+  "C4",       # comprehensions
+  "PIE",
+  "SIM",
+  "RUF",
+]
+ignore = [
+  "B905",     # zip() truncating is intended wherever it is used
+  "SIM105",   # try/except/pass reads more plainly than contextlib.suppress
+  "RUF001", "RUF002", "RUF003",  # typographic characters in user-facing text are deliberate
+]
+
+[tool.ruff.lint.per-file-ignores]
+"**/tests/**" = ["E402"]  # tests set up the environment before importing the app
+
+[tool.pytest.ini_options]
+testpaths = ["app/tests", "agent/tests"]
+addopts = "-p no:cacheprovider"

@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>InferenceInquire</title>
+<link rel="stylesheet" href="/static/vendor/uplot/uPlot.min.css">
+<link rel="stylesheet" href="/static/style.css">
+<link rel="icon" href="/static/icons/icon.svg" type="image/svg+xml">
+<!-- Installable: Add to Home Screen opens it full screen with its own icon. -->
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="apple-touch-icon" href="/static/icons/apple-touch-icon.png">
+<meta name="theme-color" content="#0d0d0d">
+<meta name="color-scheme" content="dark light">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="InferenceInquire">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="row">
+    <div class="brand">
+      <span class="mark" aria-hidden="true">
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M2 11.5 5.6 7l2.8 2.6L13.8 4"/><path d="M2 14h12"/>
+        </svg>
+      </span>
+      <span>
+        <h1>InferenceInquire</h1>
+        <span class="host" id="hostline">connecting…</span>
+      </span>
+    </div>
+
+    <span class="chip" id="chip-model" title="Ground truth from /props model_path">
+      <span class="dot"></span><strong id="model-alias">—</strong>
+      <span id="model-unit" class="hint"></span>
+    </span>
+    <span class="chip" id="chip-health"><span class="dot"></span><span id="health-text">connecting…</span></span>
+    <span class="chip" id="chip-uptime" data-needs="agent"><span id="uptime-text">—</span></span>
+
+    <div class="spacer"></div>
+
+    <button class="chip" id="freeze" aria-pressed="false" title="Freeze live updates (space)">
+      <span class="dot live" id="link-dot"></span><span id="link-text">live</span>
+    </button>
+    <button class="iconbtn" id="theme-toggle" title="Toggle light / dark (t)" aria-label="Toggle colour theme">
+      <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+        <circle cx="8" cy="8" r="3.4"/><path d="M8 1v1.6M8 13.4V15M15 8h-1.6M2.6 8H1M12.9 3.1l-1.1 1.1M4.2 11.8l-1.1 1.1M12.9 12.9l-1.1-1.1M4.2 4.2 3.1 3.1"/>
+      </svg>
+    </button>
+  </div>
+
+  <div class="row two">
+    <nav class="navlinks" id="navlinks" role="tablist" aria-label="Pages">
+      <a href="#tab=overview" data-tab="overview" role="tab">Overview</a>
+      <a href="#tab=inference" data-tab="inference" role="tab">Inference</a>
+      <a href="#tab=flow" data-tab="flow" role="tab">Anatomy</a>
+      <a href="#tab=gpus" data-tab="gpus" role="tab" data-needs="agent">GPUs</a>
+      <a href="#tab=host" data-tab="host" role="tab" data-needs="agent">Host</a>
+      <a href="#tab=health" data-tab="health" role="tab">Health</a>
+      <a href="#tab=all" data-tab="all" role="tab" title="Every page, one after another">All</a>
+    </nav>
+    <div class="spacer"></div>
+    <button class="chip" id="annot-toggle" aria-pressed="true"
+      title="Mark model changes, restarts and alerts on every time chart (e)">events</button>
+    <span class="hint">Range</span>
+    <div class="segmented" id="range" role="group" aria-label="Time range for all charts">
+      <button data-range="5m">5m</button>
+      <button data-range="15m">15m</button>
+      <button data-range="1h" aria-pressed="true">1h</button>
+      <button data-range="6h">6h</button>
+      <button data-range="24h">24h</button>
+      <button data-range="7d">7d</button>
+      <button data-range="14d">14d</button>
+      <button data-range="30d">30d</button>
+      <button data-range="90d">90d</button>
+      <button data-range="1y">1y</button>
+    </div>
+    <span class="hint" id="range-note">live</span>
+  </div>
+</header>
+
+<main>
+
+  <div id="loadbanner"></div>
+  <div class="timebanner" id="timebanner" hidden></div>
+  <div class="alerts" id="alerts"></div>
+
+  <!-- ============================= OVERVIEW ============================= -->
+  <!-- The first screen answers three questions: is it OK (the verdict above
+       and the tiles), is it busy (requests and power over time), and what
+       happened recently (the events, also marked on the timeline). -->
+  <div class="page" data-page="overview">
+  <h2 class="section-title" id="sec-overview">Overview<span class="rule"></span>
+    <span class="meta" id="overview-meta"></span></h2>
+
+  <p class="agent-note" data-needs="no-agent">Running without the host agent, on llama.cpp's own
+    endpoints. The agent adds GPU, host and per-request telemetry: see the README.</p>
+  <div class="tiles" id="tiles"></div>
+
+  <div class="grid" style="margin-top:14px">
+    <section class="card col-7">
+      <header>
+        <h2>Activity</h2>
+        <span class="sub">requests running and what the GPUs drew, with every event marked</span>
+      </header>
+      <div class="minihead">Requests</div>
+      <div class="legend" id="lg-act-req"></div>
+      <div class="plot" id="c-act-req"></div>
+      <div data-needs="agent">
+        <div class="minihead" style="margin-top:8px">GPU power, all cards</div>
+        <div class="plot" id="c-act-pwr"></div>
+      </div>
+    </section>
+    <section class="card col-5 ov-events">
+      <header><h2>Recent events</h2><span class="sub">newest first · the full log is under Health</span></header>
+      <div id="recent-events"></div>
+    </section>
+  </div>
+  </div>
+
+  <!-- ============================ INFERENCE ============================ -->
+  <div class="page" data-page="inference">
+  <h2 class="section-title" id="sec-inference">Inference<span class="rule"></span>
+    <span class="meta" id="inference-meta"></span></h2>
+
+  <div class="grid">
+    <section class="card col-6">
+      <header>
+        <h2>Decode throughput</h2>
+        <span class="sub" data-needs="agent">tokens per second — one mark per completed request</span>
+        <span class="sub" data-needs="no-agent">tokens per second, from llama.cpp&rsquo;s counters</span>
+        <div class="actions"><button class="iconbtn" data-table="c-decode">table</button></div>
+      </header>
+      <div class="legend" id="lg-decode"></div>
+      <div class="plot" id="c-decode"></div>
+      <div class="note" id="decode-note" data-needs="agent">llama.cpp books generation time only when a request finishes,
+        so each mark is one completed request rather than a continuous rate.<span id="probe-note"></span></div>
+      <div class="note" data-needs="no-agent">llama.cpp books generation time only when a request finishes,
+        so each mark is a poll in which requests finished, averaged over them.</div>
+    </section>
+
+    <section class="card col-6">
+      <header>
+        <h2>Prefill throughput</h2>
+        <span class="sub" data-needs="agent">prompt tokens per second — requests that computed at least 1,024 prompt tokens</span>
+        <span class="sub" data-needs="no-agent">prompt tokens per second, from llama.cpp&rsquo;s counters</span>
+        <div class="actions"><button class="iconbtn" data-table="c-prefill">table</button></div>
+      </header>
+      <div class="plot" id="c-prefill"></div>
+      <div class="note">Prefill is usually the most power-hungry phase: short bursts above a card&rsquo;s
+        power cap are normal here.</div>
+    </section>
+
+    <section class="card col-12" data-needs="agent">
+      <header>
+        <h2>Latency</h2>
+        <span class="sub">per workload request: time to first token and end to end, on a log scale</span>
+        <div class="actions"><button class="iconbtn" data-table="c-latency">table</button></div>
+      </header>
+      <div class="statrow wide" id="latency-stats"></div>
+      <div class="legend" id="lg-latency"></div>
+      <div class="plot" id="c-latency"></div>
+      <div class="note" id="latency-note"></div>
+    </section>
+
+    <section class="card col-4">
+      <header>
+        <h2>Efficiency ratios</h2>
+        <span class="sub" data-needs="agent">per workload request: work avoided or reused</span>
+        <span class="sub" data-needs="no-agent">work avoided or reused, from llama.cpp&rsquo;s counters</span>
+        <div class="actions"><button class="iconbtn" data-table="c-ratios">table</button></div>
+      </header>
+      <div class="legend" id="lg-ratios"></div>
+      <div class="plot" id="c-ratios"></div>
+    </section>
+
+    <section class="card col-4">
+      <header>
+        <h2>Draft acceptance by position</h2>
+        <span class="sub">cumulative, per speculative slot</span>
+        <div class="actions"><button class="iconbtn" data-table="c-spec">table</button></div>
+      </header>
+      <div class="plot" id="c-spec"></div>
+      <div class="note" id="spec-note"></div>
+    </section>
+
+    <section class="card col-4">
+      <header>
+        <h2>Concurrency</h2>
+        <span class="sub">sampled every poll, unlike the throughput marks</span>
+        <div class="actions"><button class="iconbtn" data-table="c-conc">table</button></div>
+      </header>
+      <div class="legend" id="lg-conc"></div>
+      <div class="plot" id="c-conc"></div>
+    </section>
+
+
+    <section class="card col-6" data-needs="agent">
+      <header>
+        <h2>Prefill vs context depth</h2>
+        <span class="sub">one mark per completed request</span>
+        <div class="actions"><button class="iconbtn" data-table="c-depth-prefill">table</button></div>
+      </header>
+      <div class="plot" id="c-depth-prefill"></div>
+      <div class="note">The relationship a depth sweep measures on purpose, read here from traffic
+        that was going to happen anyway. Older marks fade.</div>
+    </section>
+
+    <section class="card col-6" data-needs="agent">
+      <header>
+        <h2>Decode vs context depth</h2>
+        <span class="sub">one mark per completed request</span>
+        <div class="actions"><button class="iconbtn" data-table="c-depth-decode">table</button></div>
+      </header>
+      <div class="plot" id="c-depth-decode"></div>
+      <div class="note">Decode re-reads the whole key/value cache for every token, so it is the
+        phase that should slow as context grows.</div>
+    </section>
+
+    <section class="card col-12" data-needs="agent">
+      <header>
+        <h2>Request health</h2>
+        <span class="sub">what the throughput charts cannot show — from llama.cpp&rsquo;s own journal</span>
+      </header>
+      <div class="statrow wide" id="reqhealth"></div>
+      <div class="note" id="reqhealth-note"></div>
+    </section>
+
+    <section class="card col-12" data-needs="agent">
+      <header>
+        <h2>Energy &amp; usage</h2>
+        <span class="sub" id="usage-sub">what the box did, and what it cost to run</span>
+        <div class="actions">
+          <button class="iconbtn" data-table="c-usage-tok">table</button>
+        </div>
+      </header>
+      <div class="statrow wide" id="usage-stats"></div>
+      <div class="twin">
+        <div class="twin-cell">
+          <div class="minihead">Tokens generated</div>
+          <div class="legend" id="lg-usage-tok"></div>
+          <div class="plot" id="c-usage-tok"></div>
+        </div>
+        <div class="twin-cell">
+          <div class="minihead" id="usage-wh-head">GPU energy</div>
+          <div class="legend" id="lg-usage-wh"></div>
+          <div class="plot" id="c-usage-wh"></div>
+        </div>
+      </div>
+      <div class="note" id="usage-note"></div>
+    </section>
+
+    <section class="card col-6">
+      <header><h2>Slots</h2><span class="sub" id="slots-sub"></span></header>
+      <div id="slots"></div>
+    </section>
+
+    <section class="card col-6">
+      <header><h2>Loaded model</h2><span class="sub">served identity, from the server itself</span></header>
+      <dl class="kvlist" id="modelinfo"></dl>
+      <div class="note">llama.cpp ignores the model name a client sends — <code>model_path</code> is the only
+        trustworthy identity, and <code>model_ftype</code> can misreport mixed-precision quants.</div>
+    </section>
+  </div>
+
+
+  </div>
+
+  <!-- =========================== ANATOMY / FLOW ======================== -->
+  <div class="page" data-page="flow">
+  <h2 class="section-title" id="sec-flow">Anatomy &amp; flow<span class="rule"></span>
+    <span class="meta" id="flow-meta"></span></h2>
+
+  <div class="grid">
+    <section class="card col-12" data-needs="agent">
+      <header>
+        <h2>Request lifecycle</h2>
+        <span class="sub">stages light up from llama.cpp&rsquo;s own journal — hover any stage</span>
+        <div class="actions"><span class="hint" id="lifecycle-hint"></span></div>
+      </header>
+      <div id="reqflow"></div>
+      <div id="lanes" style="margin-top:14px"></div>
+    </section>
+
+
+    <section class="card col-12" data-needs="agent">
+      <header>
+        <h2>Slot occupancy</h2>
+        <span class="sub">every completed request, by slot — hover a bar</span>
+        <div class="actions">
+          <span class="legend" id="lg-occ"></span>
+          <button class="iconbtn" data-table="c-occupancy">table</button>
+        </div>
+      </header>
+      <div class="plot" id="c-occupancy"></div>
+      <div class="note" id="occ-note"></div>
+    </section>
+
+    <section class="card col-12">
+      <header>
+        <h2>KV cache map</h2>
+        <span class="sub" id="kv-sub">what each slot is holding right now</span>
+      </header>
+      <div id="kvmap"></div>
+      <div class="note">Releasing a slot does not throw its work away. On builds with unified KV and
+        idle-slot caching, an idle slot&rsquo;s state is parked in llama.cpp&rsquo;s host-RAM prompt cache
+        (<code>--cache-ram</code>) and restored when a request with the same prefix arrives, so an idle
+        slot reading 0 is normal. What does lose it is eviction from that cache, or a state too big for
+        it — both counted under Request health above.</div>
+    </section>
+
+    <section class="card col-7 hug" data-needs="agent">
+      <header>
+        <h2>Hardware dataflow</h2>
+        <span class="sub">measured byte rates — hover a node</span>
+        <div class="actions"><span class="hint" id="pcie-hint"></span></div>
+      </header>
+      <div id="hwflow"></div>
+      <div class="note">Disk rate from <code>/proc/diskstats</code>, PCIe from
+        <code>nvidia-smi dmon</code>. A card&rsquo;s PCIe counter is its whole link — host
+        transfers and card-to-card traffic share it and cannot be separated.</div>
+    </section>
+
+    <section class="card col-5" data-needs="agent">
+      <header><h2>Recent requests</h2><span class="sub">per-request timings from the journal</span></header>
+      <div id="reqfeed"></div>
+    </section>
+
+    <section class="card col-12" data-needs="agent">
+      <header>
+        <h2>Model anatomy</h2>
+        <span class="sub" id="arch-sub">read from the loaded model&rsquo;s GGUF header</span>
+      </header>
+      <div id="arch"></div>
+    </section>
+  </div>
+
+  </div>
+
+  <!-- ============================== GPUs =============================== -->
+  <div class="page" data-page="gpus" data-needs="agent">
+  <h2 class="section-title" id="sec-gpus">GPUs<span class="rule"></span>
+    <span class="meta" id="gpu-meta"></span></h2>
+
+  <div class="grid" id="gpucards"></div>
+
+  <div class="grid" style="margin-top:14px">
+    <section class="card col-6">
+      <header>
+        <h2>Board power</h2><span class="sub" id="power-sub">watts per card</span>
+        <div class="actions"><button class="iconbtn" data-table="c-power">table</button></div>
+      </header>
+      <div class="legend" id="lg-power"></div>
+      <div class="plot" id="c-power"></div>
+    </section>
+
+    <section class="card col-6">
+      <header>
+        <h2>Memory temperature</h2><span class="sub" id="hbm-sub">memory junction, where the card reports it</span>
+        <div class="actions"><button class="iconbtn" data-table="c-hbm">table</button></div>
+      </header>
+      <div class="legend" id="lg-hbm"></div>
+      <div class="plot" id="c-hbm"></div>
+    </section>
+
+    <section class="card col-6">
+      <header>
+        <h2>GPU utilisation</h2><span class="sub">share of time with work resident — not work done</span>
+        <div class="actions"><button class="iconbtn" data-table="c-util">table</button></div>
+      </header>
+      <div class="legend" id="lg-util"></div>
+      <div class="plot" id="c-util"></div>
+    </section>
+
+    <section class="card col-6">
+      <header>
+        <h2>VRAM in use</h2><span class="sub" id="vram-sub">percent per card</span>
+        <div class="actions"><button class="iconbtn" data-table="c-vram">table</button></div>
+      </header>
+      <div class="legend" id="lg-vram"></div>
+      <div class="plot" id="c-vram"></div>
+    </section>
+  </div>
+
+  </div>
+
+  <!-- ============================== HOST =============================== -->
+  <div class="page" data-page="host" data-needs="agent">
+  <h2 class="section-title" id="sec-host">Host hardware<span class="rule"></span>
+    <span class="meta" id="host-meta"></span></h2>
+
+  <div class="grid">
+    <section class="card col-4">
+      <header><h2>CPU cores</h2><span class="sub" id="cores-sub"></span>
+        <div class="actions"><button class="iconbtn" data-table="cores-table">table</button></div>
+      </header>
+      <div class="cores" id="cores"></div>
+      <div class="scalelegend"><span>idle</span><span class="ramp" id="ramp"></span><span>busy</span></div>
+      <div id="cores-table" hidden></div>
+    </section>
+
+    <section class="card col-4">
+      <header><h2>Memory &amp; storage</h2><span class="sub">host and guests</span></header>
+      <div id="memory"></div>
+    </section>
+
+    <section class="card col-4">
+      <header><h2>Network</h2><span class="sub" id="net-sub"></span>
+        <div class="actions"><button class="iconbtn" data-table="c-net">table</button></div>
+      </header>
+      <div class="legend" id="lg-net"></div>
+      <div class="plot" id="c-net"></div>
+    </section>
+
+    <section class="card col-6">
+      <header>
+        <h2>Host CPU load</h2><span class="sub" id="cpu-sub"></span>
+        <div class="actions"><button class="iconbtn" data-table="c-cpu">table</button></div>
+      </header>
+      <div class="plot" id="c-cpu"></div>
+    </section>
+
+    <section class="card col-6">
+      <header>
+        <h2>Chassis temperatures</h2><span class="sub">from the BMC</span>
+        <div class="actions"><button class="iconbtn" data-table="c-temps">table</button></div>
+      </header>
+      <div class="legend" id="lg-temps"></div>
+      <div class="plot" id="c-temps"></div>
+    </section>
+
+    <section class="card col-6">
+      <header><h2>IPMI sensors</h2><span class="sub" id="ipmi-sub"></span></header>
+      <div class="tablewrap tall" id="ipmi"></div>
+    </section>
+
+    <section class="card col-6">
+      <header>
+        <h2 id="rail-title">Voltage rail</h2><span class="sub" id="rail-sub"></span>
+        <div class="actions"><button class="iconbtn" data-table="c-rail">table</button></div>
+      </header>
+      <div class="plot" id="c-rail"></div>
+    </section>
+  </div>
+
+  </div>
+
+  <!-- ========================= HEALTH / TELEMETRY ====================== -->
+  <div class="page" data-page="health">
+  <h2 class="section-title" id="sec-health">Health &amp; telemetry<span class="rule"></span>
+    <span class="meta" id="health-meta"></span></h2>
+
+  <div class="grid">
+    <section class="card col-4" data-needs="agent">
+      <header><h2>Services</h2><span class="sub" id="services-sub"></span></header>
+      <div id="services"></div>
+    </section>
+
+    <section class="card col-4" data-needs="agent">
+      <header><h2>Platform</h2><span class="sub">discovered at runtime</span></header>
+      <dl class="kvlist" id="platform"></dl>
+    </section>
+
+    <section class="card col-4" data-needs="agent">
+      <header><h2>Faults</h2><span class="sub">Xid and the BMC event log</span></header>
+      <div id="faults"></div>
+    </section>
+
+    <section class="card col-12">
+      <header><h2>Event log</h2><span class="sub">alerts raised and cleared by this dashboard</span></header>
+      <div class="tablewrap" id="events"></div>
+    </section>
+  </div>
+
+  </div>
+</main>
+
+<div class="footer">
+  <div id="footer-text">—</div>
+  <div style="margin-top:6px">
+    <kbd>space</kbd> freeze · <kbd>t</kbd> theme · <kbd>e</kbd> events · <kbd>1</kbd>–<kbd>9</kbd>, <kbd>0</kbd> range ·
+    <kbd>←</kbd><kbd>→</kbd> step a focused chart<br>
+    drag across a chart to zoom · double-click or <kbd>esc</kbd> to zoom out · click a legend entry to hide its line
+  </div>
+</div>
+<div class="tiptext" id="tiptext"></div>
+
+<div class="explainer" id="explainer"></div>
+<!-- uPlot, vendored (MIT): the charts. A classic script, so it has run before the module. -->
+<script src="/static/vendor/uplot/uPlot.iife.min.js"></script>
+<script type="module" src="/static/js/main.js"></script>
+</body>
+</html>

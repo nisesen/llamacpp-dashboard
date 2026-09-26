@@ -1,0 +1,92 @@
+{
+ "matched": {
+  "auth_fail": 2,
+  "cache_evict": 2,
+  "cache_skip": 2,
+  "cancel": 2,
+  "tg": 5,
+  "prompt": 4,
+  "eval": 4,
+  "total": 4,
+  "draft": 2,
+  "graphs": 4,
+  "launch": 4,
+  "release": 4,
+  "pick_lcp": 2,
+  "pick_lru": 5,
+  "loading": 4,
+  "loaded": 3,
+  "oom": 2
+ },
+ "requests": [
+  {
+   "task": 137,
+   "slot": 2,
+   "prompt_tokens": 22985,
+   "prefill_tps": 526.79,
+   "gen_tokens": 128,
+   "decode_tps": 36.78,
+   "accept_rate": null,
+   "n_tokens": 23112,
+   "wall_s": 47.42484092712402,
+   "pick": {
+    "how": "lru"
+   }
+  },
+  {
+   "task": 7,
+   "slot": 3,
+   "prompt_tokens": 25,
+   "prefill_tps": 62.29,
+   "gen_tokens": 128,
+   "decode_tps": 41.93,
+   "accept_rate": null,
+   "n_tokens": 182,
+   "wall_s": 3.4325010776519775,
+   "pick": {
+    "how": "cache",
+    "similarity": 0.6,
+    "keep": 0.717
+   }
+  },
+  {
+   "task": 0,
+   "slot": 3,
+   "prompt_tokens": 43,
+   "prefill_tps": 45.84,
+   "gen_tokens": 4,
+   "decode_tps": 22.72,
+   "accept_rate": null,
+   "n_tokens": 46,
+   "wall_s": 1.073401927947998,
+   "pick": {
+    "how": "lru"
+   }
+  },
+  {
+   "task": 455,
+   "slot": 0,
+   "prompt_tokens": 183638,
+   "prefill_tps": 492.2,
+   "gen_tokens": 128,
+   "decode_tps": 19.52,
+   "accept_rate": null,
+   "n_tokens": 183765,
+   "wall_s": 382.68717908859253,
+   "pick": {
+    "how": "lru"
+   }
+  }
+ ],
+ "counters": {
+  "auth_fail": 2,
+  "cache_evict": 2,
+  "cache_evict_mib": 1011.152,
+  "cache_skip": 2,
+  "cancel": 2
+ },
+ "load": {
+  "state": "loaded",
+  "path": "/opt/models/flashnext/Qwen3.8-Flash-Next-AD-4.27bpw-Q4_K_M-M64-00001-of-00033.gguf"
+ }
+}

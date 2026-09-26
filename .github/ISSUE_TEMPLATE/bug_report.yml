@@ -1,0 +1,62 @@
+name: Bug report
+description: Something shows wrong, is missing, or breaks.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. Please remove secrets (API keys, tokens, bot URLs) and anything
+        private from logs before you paste them.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened, and what did you expect?
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: InferenceInquire version
+      description: The Health tab shows it (Platform, Dashboard).
+      placeholder: "0.1.0"
+    validations:
+      required: true
+  - type: dropdown
+    id: install
+    attributes:
+      label: How is it installed?
+      options:
+        - compose.yaml (dashboard and agent)
+        - The dashboard alone (docker run)
+        - The agent as a systemd service
+        - Proxmox installer
+        - From source
+    validations:
+      required: true
+  - type: input
+    id: llama
+    attributes:
+      label: llama.cpp build
+      description: The build under "Loaded model", or `llama-server --version`.
+      placeholder: "b11176"
+    validations:
+      required: true
+  - type: input
+    id: runtime
+    attributes:
+      label: Where llama.cpp runs, and the GPUs
+      placeholder: "Docker, 2x RTX 4090, driver 570"
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: |
+        The dashboard's log (`docker compose logs dashboard`), the agent's
+        (`journalctl -u inferenceinquire-agent` or `docker compose logs agent`), and, for
+        missing request data, a few lines of llama.cpp's own log around a request.
+      render: text
+  - type: textarea
+    id: more
+    attributes:
+      label: Anything else
+      description: Screenshots help with anything on the page.

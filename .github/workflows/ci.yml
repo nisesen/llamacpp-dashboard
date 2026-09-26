@@ -1,0 +1,191 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+
+# Read-only token. Only the publish job, which runs for a version tag, may
+# write packages.
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+# Actions are pinned to a commit, with the release it is noted beside it.
+jobs:
+  lint:
+    name: Lint, format and secret scan
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.13"
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ~/.cache/pre-commit
+          key: pre-commit-${{ hashFiles('.pre-commit-config.yaml') }}
+      - run: pip install pre-commit==4.6.2
+      - run: pre-commit run --all-files --show-diff-on-failure
+
+  test:
+    name: Tests (Python ${{ matrix.python }})
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        # 3.11: the oldest interpreter the host agent supports.
+        # 3.13: what the dashboard image runs.
+        python: ["3.11", "3.13"]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: ${{ matrix.python }}
+          cache: pip
+          cache-dependency-path: app/requirements.txt
+      - run: pip install -r app/requirements.txt
+      # The dashboard's unit tests, and the agent's: its self-test checks, the
+      # journal fixtures per llama.cpp build, and the built one-file agent.
+      - run: pytest
+
+  browser:
+    name: Browser (demo mode, 1440 and 375 px)
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: requirements-dev.txt
+      - run: pip install -r requirements-dev.txt
+      - run: playwright install --with-deps chromium
+      - run: pytest e2e
+
+  image:
+    name: Images build and run
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - run: docker compose config -q
+      - run: docker build -t inferenceinquire:ci app
+      - run: docker run --rm --entrypoint "" inferenceinquire:ci python -m pytest tests -q -p no:cacheprovider
+      # The agent's image runs its self-test while it builds.
+      - run: docker build -t inferenceinquire-agent:ci agent
+      - name: Demo mode comes up healthy
+        run: |
+          docker run -d --name demo -e DEMO=1 -p 8080:8000 inferenceinquire:ci
+          for i in $(seq 1 60); do
+            [ "$(docker inspect --format '{{.State.Health.Status}}' demo)" = healthy ] && break
+            sleep 2
+          done
+          docker inspect --format '{{.State.Health.Status}}' demo | grep -qx healthy
+          curl -fsS http://127.0.0.1:8080/api/state | python3 -c 'import json, sys; s = json.load(sys.stdin)["snap"]; assert s["demo"] and s["gpus"], s.keys()'
+      # As compose.yaml runs it, less the GPUs this runner does not have: it
+      # finds Docker, and answers with the token the dashboard made.
+      - name: The agent and the dashboard find each other
+        run: |
+          docker run -d --name agent --network host --pid host --cap-add SYSLOG --read-only \
+            -e AGENT_HOST=127.0.0.1 -e AGENT_TOKEN_FILE=/token/agent-token \
+            -v token:/token:ro -v /var/run/docker.sock:/var/run/docker.sock:ro inferenceinquire-agent:ci
+          docker run -d --name dash --network host --read-only --tmpfs /tmp \
+            -e PORT=8090 -e AGENT_URL=http://127.0.0.1:9101 -e AGENT_TOKEN_FILE=/token/agent-token \
+            -e LLAMA_URL=http://127.0.0.1:9 -v token:/token -v data:/data inferenceinquire:ci
+          for i in $(seq 1 30); do
+            curl -fsS http://127.0.0.1:8090/api/state 2>/dev/null \
+              | python3 -c 'import json, sys; s = json.load(sys.stdin)["snap"]; sys.exit(not s.get("agent_ok"))' && break
+            sleep 2
+          done
+          curl -fsS http://127.0.0.1:8090/api/state | python3 -c 'import json, sys; s = json.load(sys.stdin)["snap"]; assert s["agent_ok"] and s["llm_ct"]["runtime"] == "docker", s["llm_ct"]'
+      - if: failure()
+        run: |
+          docker logs demo || true
+          docker logs agent || true
+          docker logs dash || true
+
+  # Both images for both architectures, on every push, so a release never
+  # finds out late that one does not build. Pushed to GHCR only for a tag.
+  multiarch:
+    name: ${{ matrix.image }} for amd64 and arm64${{ startsWith(github.ref, 'refs/tags/v') && ', published' || '' }}
+    needs: [lint, test, browser, image]
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      packages: write
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { context: app, image: inferenceinquire }
+          - { context: agent, image: inferenceinquire-agent }
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: The tag is the version the code carries
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: |
+          version=$(sed -n 's/^__version__ = "\(.*\)"/\1/p' app/inferenceinquire/__init__.py)
+          test "v$version" = "$GITHUB_REF_NAME" || { echo "tag $GITHUB_REF_NAME, code $version"; exit 1; }
+      - uses: docker/setup-qemu-action@99012661954931238ded8c8b007157a8430204e1 # v4.4.0
+      - uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4.4.1
+      - id: meta
+        uses: docker/metadata-action@dc802804100637a589fabce1cb79ff13a1411302 # v6.2.0
+        with:
+          images: ghcr.io/${{ github.repository_owner }}/${{ matrix.image }}
+          # Only the semver tags are ever pushed; the branch and PR tags just
+          # give an untagged build a name.
+          tags: |
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=ref,event=branch
+            type=ref,event=pr
+          labels: |
+            org.opencontainers.image.title=${{ matrix.image }}
+            org.opencontainers.image.licenses=MIT
+      - if: startsWith(github.ref, 'refs/tags/v')
+        uses: docker/login-action@dbcb813823bdd20940b903addbd779551569679f # v4.6.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7.4.0
+        with:
+          context: ${{ matrix.context }}
+          platforms: linux/amd64,linux/arm64
+          push: ${{ startsWith(github.ref, 'refs/tags/v') }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha,scope=${{ matrix.image }}
+          cache-to: type=gha,mode=max,scope=${{ matrix.image }}
+
+  # A version tag, once its images are published: the GitHub release, with
+  # that version's changelog section as its notes.
+  release:
+    name: GitHub release
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: [multiarch]
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Release notes from CHANGELOG.md
+        run: |
+          awk -v v="${GITHUB_REF_NAME#v}" '
+            /^## / { on = index($0, "[" v "]") > 0; next }
+            on' CHANGELOG.md > notes.md
+          test -s notes.md
+      # A tag pushed again updates its release instead of failing.
+      - name: Create or update the release
+        run: |
+          if gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
+            gh release edit "$GITHUB_REF_NAME" --title "$GITHUB_REF_NAME" --notes-file notes.md
+          else
+            gh release create "$GITHUB_REF_NAME" --title "$GITHUB_REF_NAME" --notes-file notes.md --verify-tag
+          fi
+        env:
+          GH_TOKEN: ${{ github.token }}

@@ -1,0 +1,32 @@
+[Unit]
+Description=InferenceInquire host agent (read-only telemetry for the dashboard)
+Documentation=https://github.com/nisesen/inferenceinquire
+After=network-online.target
+Wants=network-online.target
+# Purely advisory: the agent reports on the inference server, it does not
+# depend on it. On Proxmox, start after the guests.
+After=pve-guests.service docker.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /usr/local/bin/inferenceinquire-agent
+Environment=AGENT_PORT=9101
+Environment=AGENT_TOKEN_FILE=/etc/inferenceinquire/agent-token
+# Where to listen and what else to set: written by the installer.
+EnvironmentFile=-/etc/inferenceinquire/agent.env
+Restart=always
+RestartSec=5
+# Read-only by construction: it only ever queries. These confine it anyway.
+ProtectHome=yes
+ProtectSystem=full
+PrivateTmp=yes
+NoNewPrivileges=yes
+MemoryMax=512M
+CPUQuota=100%
+Nice=10
+# Deliberately NOT sandboxed away from these: nvidia-smi, ipmitool and the
+# runtimes need the device nodes, /dev/ipmi0, the Docker socket and, on
+# Proxmox, the cluster filesystem.
+
+[Install]
+WantedBy=multi-user.target

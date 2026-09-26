@@ -1,0 +1,5 @@
+# Everything to develop and test, on top of app/requirements.txt.
+-r app/requirements.txt
+ruff==0.16.9
+pre-commit==4.6.2
+playwright==1.58.0

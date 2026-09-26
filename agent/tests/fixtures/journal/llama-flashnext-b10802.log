@@ -1,0 +1,181 @@
+1789517382.087676 host llama-server[1001]: 0.00.065.988 I srv    load_model: loading model '/opt/models/flashnext/Qwen3.8-Flash-Next-AD-4.27bpw-Q4_K_M-M64-00001-of-00033.gguf'
+1789517456.919258 host llama-server[1001]: 1.14.897.620 I srv  llama_server: model loaded
+1789517493.059376 host llama-server[1001]: 1.51.037.648 I slot get_availabl: id  3 | task -1 | selected slot by LRU, t_last = -1
+1789517518.809685 host llama-server[1130]: 0.00.154.272 I srv    load_model: loading model '/opt/models/flashnext/Qwen3.8-Flash-Next-AD-4.27bpw-Q4_K_M-M64-00001-of-00033.gguf'
+1789517607.933346 host llama-server[1130]: 1.29.278.056 I srv  llama_server: model loaded
+1789517622.024756 host llama-server[1130]: 1.43.369.310 I slot get_availabl: id  3 | task -1 | selected slot by LRU, t_last = -1
+1789517623.102203 host llama-server[1130]: 1.44.446.786 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.600 (> 0.100 thold), f_keep = 0.717
+1789517672.433713 host llama-server[1130]: 2.33.778.226 I slot print_timing: id  2 | task 137 | n_gen =    114, tg =  37.48 t/s, tg_3s =  37.81 t/s
+1789517847.333683 host llama-server[1130]: 5.28.678.264 I slot print_timing: id  1 | task 279 | n_gen =    100, tg =  26.84 t/s, tg_3s =  27.12 t/s
+1789517848.997804 host llama-server[1130]: 5.30.342.536 I slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = -1
+1789517848.997995 host llama-server[1130]: 5.30.342.778 I slot launch_slot_: id  0 | task 455 | processing task, is_child = 0
+1789517856.016282 host llama-server[1130]: 5.37.361.007 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens =   2078, progress = 0.01, t =   3.94 s / 527.71 tokens per second
+1789517859.623640 host llama-server[1130]: 5.40.968.199 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens =   4126, progress = 0.02, t =   7.54 s / 546.85 tokens per second
+1789517863.098817 host llama-server[1130]: 5.44.443.397 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens =   6174, progress = 0.03, t =  11.02 s / 560.24 tokens per second
+1789517866.588806 host llama-server[1130]: 5.47.933.370 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens =   8222, progress = 0.04, t =  14.51 s / 566.64 tokens per second
+1789517870.039475 host llama-server[1130]: 5.51.384.208 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens =  10270, progress = 0.06, t =  17.96 s / 571.79 tokens per second
+1789517873.457891 host llama-server[1130]: 5.54.802.461 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens =  12318, progress = 0.07, t =  21.38 s / 576.17 tokens per second
+1789517876.881072 host llama-server[1130]: 5.58.225.608 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens =  14366, progress = 0.08, t =  24.80 s / 579.22 tokens per second
+1789517880.376902 host llama-server[1130]: 6.01.721.387 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens =  16414, progress = 0.09, t =  28.30 s / 580.04 tokens per second
+1789517883.845000 host llama-server[1130]: 6.05.189.515 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens =  18462, progress = 0.10, t =  31.77 s / 581.19 tokens per second
+1789517887.286131 host llama-server[1130]: 6.08.630.858 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens =  20510, progress = 0.11, t =  35.21 s / 582.54 tokens per second
+1789517890.768532 host llama-server[1130]: 6.12.113.264 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens =  22558, progress = 0.12, t =  38.69 s / 583.04 tokens per second
+1789517894.232527 host llama-server[1130]: 6.15.577.117 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens =  24606, progress = 0.13, t =  42.15 s / 583.72 tokens per second
+1789517897.721428 host llama-server[1130]: 6.19.065.991 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens =  26654, progress = 0.15, t =  45.64 s / 583.97 tokens per second
+1789517901.203827 host llama-server[1130]: 6.22.548.373 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens =  28702, progress = 0.16, t =  49.13 s / 584.26 tokens per second
+1789517904.690359 host llama-server[1130]: 6.26.034.905 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens =  30750, progress = 0.17, t =  52.61 s / 584.47 tokens per second
+1789517908.194892 host llama-server[1130]: 6.29.539.421 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens =  32798, progress = 0.18, t =  56.12 s / 584.47 tokens per second
+1789517911.760263 host llama-server[1130]: 6.33.104.854 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens =  34846, progress = 0.19, t =  59.68 s / 583.86 tokens per second
+1789517915.320817 host llama-server[1130]: 6.36.665.239 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens =  36894, progress = 0.20, t =  63.24 s / 583.38 tokens per second
+1789517918.923485 host llama-server[1130]: 6.40.268.070 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens =  38942, progress = 0.21, t =  66.84 s / 582.57 tokens per second
+1789517922.494265 host llama-server[1130]: 6.43.838.813 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens =  40990, progress = 0.22, t =  70.42 s / 582.12 tokens per second
+1789517926.084116 host llama-server[1130]: 6.47.428.702 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens =  43038, progress = 0.23, t =  74.01 s / 581.55 tokens per second
+1789517929.688545 host llama-server[1130]: 6.51.033.275 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens =  45086, progress = 0.25, t =  77.61 s / 580.93 tokens per second
+1789517933.317365 host llama-server[1130]: 6.54.661.955 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens =  47134, progress = 0.26, t =  81.24 s / 580.19 tokens per second
+1789517936.950692 host llama-server[1130]: 6.58.295.279 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens =  49182, progress = 0.27, t =  84.87 s / 579.48 tokens per second
+1789517940.601078 host llama-server[1130]: 7.01.945.663 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens =  51230, progress = 0.28, t =  88.52 s / 578.72 tokens per second
+1789517944.318858 host llama-server[1130]: 7.05.663.445 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens =  53278, progress = 0.29, t =  92.24 s / 577.60 tokens per second
+1789517948.067684 host llama-server[1130]: 7.09.412.217 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens =  55326, progress = 0.30, t =  95.99 s / 576.38 tokens per second
+1789517951.848933 host llama-server[1130]: 7.13.193.496 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens =  57374, progress = 0.31, t =  99.77 s / 575.06 tokens per second
+1789517955.679864 host llama-server[1130]: 7.17.024.359 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens =  59422, progress = 0.32, t = 103.60 s / 573.57 tokens per second
+1789517959.465496 host llama-server[1130]: 7.20.810.056 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens =  61470, progress = 0.33, t = 107.39 s / 572.42 tokens per second
+1789517963.278611 host llama-server[1130]: 7.24.623.177 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens =  63518, progress = 0.35, t = 111.20 s / 571.21 tokens per second
+1789517967.117169 host llama-server[1130]: 7.28.461.585 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens =  65566, progress = 0.36, t = 115.04 s / 569.95 tokens per second
+1789517970.938261 host llama-server[1130]: 7.32.282.690 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens =  67614, progress = 0.37, t = 118.86 s / 568.86 tokens per second
+1789517974.796716 host llama-server[1130]: 7.36.141.302 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens =  69662, progress = 0.38, t = 122.72 s / 567.66 tokens per second
+1789517978.642887 host llama-server[1130]: 7.39.987.475 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens =  71710, progress = 0.39, t = 126.56 s / 566.59 tokens per second
+1789517982.511960 host llama-server[1130]: 7.43.856.528 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens =  73758, progress = 0.40, t = 130.43 s / 565.48 tokens per second
+1789517986.409413 host llama-server[1130]: 7.47.753.948 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens =  75806, progress = 0.41, t = 134.33 s / 564.32 tokens per second
+1789517990.355771 host llama-server[1130]: 7.51.700.226 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens =  77854, progress = 0.42, t = 138.28 s / 563.03 tokens per second
+1789517994.328132 host llama-server[1130]: 7.55.672.865 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens =  79902, progress = 0.44, t = 142.25 s / 561.70 tokens per second
+1789517998.330846 host llama-server[1130]: 7.59.675.567 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens =  81950, progress = 0.45, t = 146.25 s / 560.33 tokens per second
+1789518002.365548 host llama-server[1130]: 8.03.710.059 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens =  83998, progress = 0.46, t = 150.29 s / 558.92 tokens per second
+1789518006.369850 host llama-server[1130]: 8.07.714.573 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens =  86046, progress = 0.47, t = 154.29 s / 557.69 tokens per second
+1789518010.398853 host llama-server[1130]: 8.11.743.560 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens =  88094, progress = 0.48, t = 158.32 s / 556.43 tokens per second
+1789518014.440419 host llama-server[1130]: 8.15.784.979 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens =  90142, progress = 0.49, t = 162.36 s / 555.19 tokens per second
+1789518018.481792 host llama-server[1130]: 8.19.826.348 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens =  92190, progress = 0.50, t = 166.40 s / 554.02 tokens per second
+1789518022.580067 host llama-server[1130]: 8.23.924.654 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens =  94238, progress = 0.51, t = 170.50 s / 552.71 tokens per second
+1789518026.677508 host llama-server[1130]: 8.28.022.241 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens =  96286, progress = 0.52, t = 174.60 s / 551.47 tokens per second
+1789518030.821976 host llama-server[1130]: 8.32.166.543 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens =  98334, progress = 0.54, t = 178.74 s / 550.14 tokens per second
+1789518034.951291 host llama-server[1130]: 8.36.295.876 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens = 100382, progress = 0.55, t = 182.87 s / 548.92 tokens per second
+1789518039.130126 host llama-server[1130]: 8.40.474.711 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens = 102430, progress = 0.56, t = 187.05 s / 547.60 tokens per second
+1789518043.305190 host llama-server[1130]: 8.44.649.696 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens = 104478, progress = 0.57, t = 191.23 s / 546.36 tokens per second
+1789518047.523731 host llama-server[1130]: 8.48.868.302 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens = 106526, progress = 0.58, t = 195.45 s / 545.04 tokens per second
+1789518051.788663 host llama-server[1130]: 8.53.133.219 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens = 108574, progress = 0.59, t = 199.71 s / 543.66 tokens per second
+1789518056.031593 host llama-server[1130]: 8.57.376.159 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens = 110622, progress = 0.60, t = 203.95 s / 542.39 tokens per second
+1789518060.326359 host llama-server[1130]: 9.01.670.915 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens = 112670, progress = 0.61, t = 208.25 s / 541.04 tokens per second
+1789518064.647939 host llama-server[1130]: 9.05.992.488 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens = 114718, progress = 0.62, t = 212.57 s / 539.67 tokens per second
+1789518069.027913 host llama-server[1130]: 9.10.372.498 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens = 116766, progress = 0.64, t = 216.95 s / 538.22 tokens per second
+1789518073.398006 host llama-server[1130]: 9.14.742.576 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens = 118814, progress = 0.65, t = 221.32 s / 536.84 tokens per second
+1789518077.750401 host llama-server[1130]: 9.19.094.965 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens = 120862, progress = 0.66, t = 225.67 s / 535.57 tokens per second
+1789518082.154855 host llama-server[1130]: 9.23.499.419 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens = 122910, progress = 0.67, t = 230.08 s / 534.21 tokens per second
+1789518086.551721 host llama-server[1130]: 9.27.896.308 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens = 124958, progress = 0.68, t = 234.47 s / 532.93 tokens per second
+1789518090.992159 host llama-server[1130]: 9.32.336.708 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens = 127006, progress = 0.69, t = 238.91 s / 531.60 tokens per second
+1789518095.460937 host llama-server[1130]: 9.36.805.511 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens = 129054, progress = 0.70, t = 243.38 s / 530.25 tokens per second
+1789518099.926677 host llama-server[1130]: 9.41.271.087 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens = 131102, progress = 0.71, t = 247.85 s / 528.96 tokens per second
+1789518104.437755 host llama-server[1130]: 9.45.782.487 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens = 133150, progress = 0.73, t = 252.36 s / 527.62 tokens per second
+1789518109.002200 host llama-server[1130]: 9.50.346.753 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens = 135198, progress = 0.74, t = 256.92 s / 526.22 tokens per second
+1789518113.532508 host llama-server[1130]: 9.54.877.066 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens = 137246, progress = 0.75, t = 261.45 s / 524.93 tokens per second
+1789518118.122199 host llama-server[1130]: 9.59.466.763 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens = 139294, progress = 0.76, t = 266.04 s / 523.58 tokens per second
+1789518122.738112 host llama-server[1130]: 10.04.082.668 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens = 141342, progress = 0.77, t = 270.66 s / 522.21 tokens per second
+1789518127.378405 host llama-server[1130]: 10.08.722.973 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens = 143390, progress = 0.78, t = 275.30 s / 520.85 tokens per second
+1789518132.056655 host llama-server[1130]: 10.13.401.237 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens = 145438, progress = 0.79, t = 279.98 s / 519.46 tokens per second
+1789518136.796951 host llama-server[1130]: 10.18.141.526 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens = 147486, progress = 0.80, t = 284.72 s / 518.01 tokens per second
+1789518141.565452 host llama-server[1130]: 10.22.910.037 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens = 149534, progress = 0.81, t = 289.49 s / 516.55 tokens per second
+1789518146.298367 host llama-server[1130]: 10.27.642.943 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens = 151582, progress = 0.83, t = 294.22 s / 515.20 tokens per second
+1789518151.068329 host llama-server[1130]: 10.32.412.776 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens = 153630, progress = 0.84, t = 298.99 s / 513.83 tokens per second
+1789518155.905516 host llama-server[1130]: 10.37.250.064 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens = 155678, progress = 0.85, t = 303.83 s / 512.39 tokens per second
+1789518160.793146 host llama-server[1130]: 10.42.137.687 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens = 157726, progress = 0.86, t = 308.71 s / 510.91 tokens per second
+1789518165.710428 host llama-server[1130]: 10.47.054.872 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens = 159774, progress = 0.87, t = 313.63 s / 509.43 tokens per second
+1789518170.591297 host llama-server[1130]: 10.51.935.854 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens = 161822, progress = 0.88, t = 318.51 s / 508.06 tokens per second
+1789518175.478020 host llama-server[1130]: 10.56.822.740 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens = 163870, progress = 0.89, t = 323.40 s / 506.71 tokens per second
+1789518180.445117 host llama-server[1130]: 11.01.789.656 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens = 165918, progress = 0.90, t = 328.37 s / 505.28 tokens per second
+1789518185.442014 host llama-server[1130]: 11.06.786.579 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens = 167966, progress = 0.91, t = 333.36 s / 503.85 tokens per second
+1789518190.500126 host llama-server[1130]: 11.11.844.703 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens = 170014, progress = 0.93, t = 338.42 s / 502.37 tokens per second
+1789518195.568996 host llama-server[1130]: 11.16.913.710 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens = 172062, progress = 0.94, t = 343.49 s / 500.92 tokens per second
+1789518200.681680 host llama-server[1130]: 11.22.026.267 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens = 174110, progress = 0.95, t = 348.60 s / 499.45 tokens per second
+1789518205.841499 host llama-server[1130]: 11.27.186.024 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens = 176158, progress = 0.96, t = 353.76 s / 497.96 tokens per second
+1789518211.002895 host llama-server[1130]: 11.32.347.416 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens = 178206, progress = 0.97, t = 358.92 s / 496.50 tokens per second
+1789518216.184356 host llama-server[1130]: 11.37.528.919 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens = 180254, progress = 0.98, t = 364.11 s / 495.06 tokens per second
+1789518221.352487 host llama-server[1130]: 11.42.697.070 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens = 182302, progress = 0.99, t = 369.27 s / 493.68 tokens per second
+1789518223.514069 host llama-server[1130]: 11.44.858.651 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens = 183122, progress = 1.00, t = 371.44 s / 493.01 tokens per second
+1789518224.958268 host llama-server[1130]: 11.46.302.753 I slot print_timing: id  0 | task 455 | prompt processing, n_tokens = 183634, progress = 1.00, t = 372.88 s / 492.48 tokens per second
+1789518230.244593 host llama-server[1130]: 11.51.589.177 I slot print_timing: id  0 | task 455 | n_gen =    100, tg =  19.52 t/s, tg_3s =  19.72 t/s
+1789518231.677727 host llama-server[1130]: 11.53.022.344 I slot print_timing: id  0 | task 455 | prompt eval time =  373094.15 ms / 183638 tokens (    2.03 ms per token,   492.20 tokens per second)
+1789518231.677727 host llama-server[1130]: 11.53.022.349 I slot print_timing: id  0 | task 455 |        eval time =    6505.00 ms /   128 tokens (   51.22 ms per token,    19.52 tokens per second)
+1789518231.677727 host llama-server[1130]: 11.53.022.350 I slot print_timing: id  0 | task 455 |       total time =  379599.15 ms / 183766 tokens
+1789518231.677727 host llama-server[1130]: 11.53.022.351 I slot print_timing: id  0 | task 455 |    graphs reused =        505
+1789518231.685174 host llama-server[1130]: 11.53.029.615 I slot      release: id  0 | task 455 | stop processing: n_tokens = 183765, truncated = 0
+1789518321.681456 host llama-server[1130]: 13.23.026.137 I srv    operator(): operator(): cleaning up before exit...
+1789518321.681426 host systemd[1]: Stopping llama-flashnext.service - llama.cpp server - Qwen3.8-Flash-Next Q4_K_M (2x A100 40GB)...
+1789518324.166955 host systemd[1]: llama-flashnext.service: Deactivated successfully.
+1789518324.167300 host systemd[1]: Stopped llama-flashnext.service - llama.cpp server - Qwen3.8-Flash-Next Q4_K_M (2x A100 40GB).
+1789518324.167363 host systemd[1]: llama-flashnext.service: Consumed 10min 28.575s CPU time, 39.1G memory peak, 237.9M memory swap peak.
+1789518324.169324 host systemd[1]: Starting llama-flashnext.service - llama.cpp server - Qwen3.8-Flash-Next Q4_K_M (2x A100 40GB)...
+1789518324.267778 host gpu-preflight.sh[1445]: GPU preflight OK: NVIDIA AMP-AUTO-DEV, 40960 MiB total, 40471 MiB free
+1789518324.269000 host systemd[1]: Started llama-flashnext.service - llama.cpp server - Qwen3.8-Flash-Next Q4_K_M (2x A100 40GB).
+1789518324.811955 host llama-server[1467]: 0.00.154.750 I cmn  common_param: common_params_print_info: verbosity = 3 (adjust with the `-lv N` CLI arg)
+1789518324.814529 host llama-server[1467]: 0.00.157.183 I srv    load_model: loading model '/opt/models/flashnext/Qwen3.8-Flash-Next-AD-4.27bpw-Q4_K_M-M64-00001-of-00033.gguf'
+1789518327.846330 host systemd[1]: Stopping llama-flashnext.service - llama.cpp server - Qwen3.8-Flash-Next Q4_K_M (2x A100 40GB)...
+1789518328.190565 host systemd[1]: llama-flashnext.service: Deactivated successfully.
+1789518328.190927 host systemd[1]: Stopped llama-flashnext.service - llama.cpp server - Qwen3.8-Flash-Next Q4_K_M (2x A100 40GB).
+1789518328.191000 host systemd[1]: llama-flashnext.service: Consumed 3.007s CPU time, 4G memory peak.
+1789518328.193218 host systemd[1]: Starting llama-flashnext.service - llama.cpp server - Qwen3.8-Flash-Next Q4_K_M (2x A100 40GB)...
+1789518328.298992 host gpu-preflight.sh[1522]: GPU preflight OK: NVIDIA AMP-AUTO-DEV, 40960 MiB total, 40471 MiB free
+1789518328.300284 host systemd[1]: Started llama-flashnext.service - llama.cpp server - Qwen3.8-Flash-Next Q4_K_M (2x A100 40GB).
+1789518328.566882 host llama-server[1544]: 0.00.131.630 I cmn  common_param: common_params_print_info: verbosity = 3 (adjust with the `-lv N` CLI arg)
+1789518328.569341 host llama-server[1544]: 0.00.133.971 I srv    load_model: loading model '/opt/models/flashnext/Qwen3.8-Flash-Next-AD-4.27bpw-Q4_K_M-M64-00001-of-00033.gguf'
+1789518402.066575 host llama-server[1544]: 1.13.630.946 I cmn          init: llama threadpool init, n_threads = 12
+1789518402.403975 host llama-server[1544]: 1.13.968.688 I srv    load_model: initializing, n_slots = 4, n_ctx_slot = 262144, kv_unified = 'true'
+1789518402.416772 host llama-server[1544]: 1.13.981.583 W srv          init: chat template supports preserving reasoning, it is enabled by default (may use more tokens, disable via --no-reasoning-preserve)
+1789518402.417044 host llama-server[1544]: 1.13.981.777 I srv  llama_server: model loaded
+1789518402.417505 host llama-server[1544]: 1.13.981.872 I srv  llama_server: listening on http://0.0.0.0:8080
+1789518402.417505 host llama-server[1544]: 1.13.981.875 W srv  llama_server: NOTICE: server default port will be changed to :9931 in a future release
+1789518402.417505 host llama-server[1544]: 1.13.981.875 W srv  llama_server:         ref: https://github.com/ggml-org/llama.cpp/pull/26508
+1789518417.154298 host llama-server[1544]: 1.28.719.074 I slot get_availabl: id  3 | task -1 | selected slot by LRU, t_last = -1
+1789518417.154851 host llama-server[1544]: 1.28.719.445 I slot launch_slot_: id  3 | task 0 | processing task, is_child = 0
+1789518418.226415 host llama-server[1544]: 1.29.791.206 I slot print_timing: id  3 | task 0 | prompt eval time =     938.13 ms /    43 tokens (   21.82 ms per token,    45.84 tokens per second)
+1789518418.226415 host llama-server[1544]: 1.29.791.211 I slot print_timing: id  3 | task 0 |        eval time =     132.03 ms /     4 tokens (   44.01 ms per token,    22.72 tokens per second)
+1789518418.226415 host llama-server[1544]: 1.29.791.212 I slot print_timing: id  3 | task 0 |       total time =    1070.16 ms /    47 tokens
+1789518418.226415 host llama-server[1544]: 1.29.791.216 I slot print_timing: id  3 | task 0 |    graphs reused =          3
+1789518418.228253 host llama-server[1544]: 1.29.793.068 I slot      release: id  3 | task 0 | stop processing: n_tokens = 46, truncated = 0
+1789518418.242891 host llama-server[1544]: 1.29.807.700 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.600 (> 0.100 thold), f_keep = 0.717
+1789518418.242967 host llama-server[1544]: 1.29.807.765 I slot launch_slot_: id  3 | task 7 | processing task, is_child = 0
+1789518421.651342 host llama-server[1544]: 1.33.215.791 I slot print_timing: id  3 | task 7 | n_gen =    127, tg =  41.92 t/s, tg_3s =  42.26 t/s
+1789518421.674710 host llama-server[1544]: 1.33.239.504 I slot print_timing: id  3 | task 7 | prompt eval time =     401.36 ms /    25 tokens (   16.05 ms per token,    62.29 tokens per second)
+1789518421.674710 host llama-server[1544]: 1.33.239.509 I slot print_timing: id  3 | task 7 |        eval time =    3028.78 ms /   128 tokens (   23.85 ms per token,    41.93 tokens per second)
+1789518421.674710 host llama-server[1544]: 1.33.239.510 I slot print_timing: id  3 | task 7 |       total time =    3430.14 ms /   153 tokens
+1789518421.674710 host llama-server[1544]: 1.33.239.512 I slot print_timing: id  3 | task 7 |    graphs reused =        129
+1789518421.675468 host llama-server[1544]: 1.33.239.801 I slot      release: id  3 | task 7 | stop processing: n_tokens = 182, truncated = 0
+1789518422.009623 host llama-server[1544]: 1.33.574.351 I slot get_availabl: id  2 | task -1 | selected slot by LRU, t_last = -1
+1789518422.009623 host llama-server[1544]: 1.33.574.425 I slot launch_slot_: id  2 | task 137 | processing task, is_child = 0
+1789518426.862893 host llama-server[1544]: 1.38.427.505 I slot print_timing: id  2 | task 137 | prompt processing, n_tokens =   2078, progress = 0.09, t =   4.54 s / 457.65 tokens per second
+1789518430.743636 host llama-server[1544]: 1.42.308.264 I slot print_timing: id  2 | task 137 | prompt processing, n_tokens =   4126, progress = 0.18, t =   8.42 s / 489.94 tokens per second
+1789518434.490359 host llama-server[1544]: 1.46.055.138 I slot print_timing: id  2 | task 137 | prompt processing, n_tokens =   6174, progress = 0.27, t =  12.17 s / 507.39 tokens per second
+1789518438.150617 host llama-server[1544]: 1.49.715.216 I slot print_timing: id  2 | task 137 | prompt processing, n_tokens =   8222, progress = 0.36, t =  15.83 s / 519.45 tokens per second
+1789518441.796890 host llama-server[1544]: 1.53.361.467 I slot print_timing: id  2 | task 137 | prompt processing, n_tokens =  10270, progress = 0.45, t =  19.47 s / 527.35 tokens per second
+1789518445.583827 host llama-server[1544]: 1.57.148.429 I slot print_timing: id  2 | task 137 | prompt processing, n_tokens =  12318, progress = 0.54, t =  23.26 s / 529.54 tokens per second
+1789518449.377154 host llama-server[1544]: 2.00.941.878 I slot print_timing: id  2 | task 137 | prompt processing, n_tokens =  14366, progress = 0.63, t =  27.06 s / 530.99 tokens per second
+1789518453.204042 host llama-server[1544]: 2.04.768.827 I slot print_timing: id  2 | task 137 | prompt processing, n_tokens =  16414, progress = 0.71, t =  30.88 s / 531.51 tokens per second
+1789518457.025567 host llama-server[1544]: 2.08.590.357 I slot print_timing: id  2 | task 137 | prompt processing, n_tokens =  18462, progress = 0.80, t =  34.70 s / 531.99 tokens per second
+1789518460.839548 host llama-server[1544]: 2.12.404.317 I slot print_timing: id  2 | task 137 | prompt processing, n_tokens =  20510, progress = 0.89, t =  38.52 s / 532.49 tokens per second
+1789518464.565274 host llama-server[1544]: 2.16.130.057 I slot print_timing: id  2 | task 137 | prompt processing, n_tokens =  22469, progress = 0.98, t =  42.24 s / 531.90 tokens per second
+1789518465.760372 host llama-server[1544]: 2.17.325.176 I slot print_timing: id  2 | task 137 | prompt processing, n_tokens =  22981, progress = 1.00, t =  43.44 s / 529.05 tokens per second
+1789518468.956460 host llama-server[1544]: 2.20.521.230 I slot print_timing: id  2 | task 137 | n_gen =    111, tg =  36.64 t/s, tg_3s =  36.97 t/s
+1789518469.407308 host llama-server[1544]: 2.20.972.095 I slot print_timing: id  2 | task 137 | prompt eval time =   43631.97 ms / 22985 tokens (    1.90 ms per token,   526.79 tokens per second)
+1789518469.407308 host llama-server[1544]: 2.20.972.100 I slot print_timing: id  2 | task 137 |        eval time =    3452.94 ms /   128 tokens (   27.19 ms per token,    36.78 tokens per second)
+1789518469.407308 host llama-server[1544]: 2.20.972.101 I slot print_timing: id  2 | task 137 |       total time =   47084.91 ms / 23113 tokens
+1789518469.407308 host llama-server[1544]: 2.20.972.102 I slot print_timing: id  2 | task 137 |    graphs reused =        254
+1789518469.434464 host llama-server[1544]: 2.20.999.256 I slot      release: id  2 | task 137 | stop processing: n_tokens = 23112, truncated = 0
+1789541920.589466 host llama-server[2539]: 1.29.485.902 W srv    operator(): unauthorized: Invalid API Key
+1789541938.432525 host llama-server[2539]: 1.47.328.770 W srv    operator(): unauthorized: Invalid API Key
+1789542713.410209 host llama-server[2674]: 1.25.301.986 E ggml_backend_cuda_buffer_type_alloc_buffer: allocating 11888.45 MiB on device 0: cudaMalloc failed: out of memory
+1789542713.410209 host llama-server[2674]: 1.25.302.065 E ggml_gallocr_reserve_n_impl: failed to allocate CUDA0 buffer of size 12465947136
+1789547700.686174 host llama-server[15743]: 1.53.571.900 I slot print_timing: id  1 | task 276 | draft acceptance = 0.21875 (   14 accepted /    64 generated), mean len = 15.00
+1789547854.151249 host llama-server[15743]: 4.27.037.145 I slot print_timing: id  0 | task 395 | draft acceptance = 0.07812 (    5 accepted /    64 generated), mean len =  6.00
+1789550124.232148 host llama-server[16616]: 12.30.285.257 W srv         alloc:  - making room for prompt cache entry, removing oldest entry (size = 618.477 MiB)
+1789550124.306954 host llama-server[16616]: 12.30.360.062 W srv         alloc:  - making room for prompt cache entry, removing oldest entry (size = 392.675 MiB)
+1789578409.827487 host llama-server[16616]: 483.55.880.539 W srv          stop: cancel task, id_task = 58950
+1789578647.186948 host llama-server[16616]: 487.53.240.002 W srv         alloc:  - prompt state size 11329.522 MiB exceeds cache size limit 8192.000 MiB, skipping
+1789578752.022382 host llama-server[16616]: 489.38.075.413 W srv          stop: cancel task, id_task = 61591
+1789586869.862546 host llama-server[16616]: 624.55.915.622 W srv         alloc:  - prompt state size 13231.149 MiB exceeds cache size limit 8192.000 MiB, skipping

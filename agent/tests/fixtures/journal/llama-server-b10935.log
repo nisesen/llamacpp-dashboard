@@ -1,0 +1,55 @@
+1790016731.680427 host llama-server[17101]: 5407.35.004.670 I slot print_timing: id  1 | task 457454 | n_gen =  24236, tg =  54.86 t/s, tg_3s =  44.84 t/s
+1790016734.724513 host llama-server[17101]: 5407.38.048.749 I slot print_timing: id  1 | task 457454 | n_gen =  24401, tg =  54.86 t/s, tg_3s =  54.20 t/s
+1790016956.328554 host llama-server[17101]: 5411.19.652.760 I slot print_timing: id  1 | task 457454 | draft acceptance = 0.70311 (26820 accepted / 38145 generated), mean len =  3.11
+1790016957.194005 host llama-server[17101]: 5411.20.518.393 I slot get_availabl: id  1 | task -1 | selected slot by LCP similarity, f_sim_best = 0.763 (> 0.100 thold), f_keep = 0.526
+1790016979.645026 host llama-server[17101]: 5411.42.969.468 I slot print_timing: id  1 | task 470851 | draft acceptance = 0.65926 (  178 accepted /   270 generated), mean len =  2.98
+1790016979.826128 host llama-server[17101]: 5411.43.150.547 I slot get_availabl: id  2 | task -1 | selected slot by LRU, t_last = 337424131493
+1790016989.954212 host llama-server[17101]: 5411.53.278.413 W srv    operator(): unauthorized: Invalid API Key
+1790016990.344462 host llama-server[17101]: 5411.53.668.731 I slot get_availabl: id  3 | task -1 | selected slot by LRU, t_last = 337681051998
+1790017321.020302 host llama-server[17101]: 5417.24.344.570 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 1.000 (> 0.100 thold), f_keep = 0.356
+1790017321.249627 host llama-server[17101]: 5417.24.574.038 I slot launch_slot_: id  0 | task 471529 | processing task, is_child = 0
+1790017321.256365 host llama-server[17101]: 5417.24.580.627 W srv         alloc:  - making room for prompt cache entry, removing oldest entry (size = 317.767 MiB)
+1790017321.296871 host llama-server[17101]: 5417.24.621.210 W srv         alloc:  - making room for prompt cache entry, removing oldest entry (size = 547.994 MiB)
+1790017327.727393 host llama-server[17101]: 5417.31.051.798 I slot print_timing: id  0 | task 471529 | prompt eval time =     230.64 ms /     4 tokens (   57.66 ms per token,    17.34 tokens per second)
+1790017327.727393 host llama-server[17101]: 5417.31.051.805 I slot print_timing: id  0 | task 471529 |        eval time =     670.49 ms /    48 tokens (   14.27 ms per token,    70.10 tokens per second)
+1790017327.727393 host llama-server[17101]: 5417.31.051.807 I slot print_timing: id  0 | task 471529 |       total time =     901.12 ms /    52 tokens
+1790017327.727393 host llama-server[17101]: 5417.31.051.808 I slot print_timing: id  0 | task 471529 |    graphs reused =     144158
+1790017327.727393 host llama-server[17101]: 5417.31.051.815 I slot print_timing: id  0 | task 471529 | draft acceptance = 0.84615 (   33 accepted /    39 generated), mean len =  3.54
+1790017327.727393 host llama-server[17101]: 5417.31.051.873 I slot      release: id  0 | task 471529 | stop processing: n_tokens = 73, truncated = 0
+1790017460.648909 host llama-server[17101]: 5419.43.973.252 W srv    operator(): unauthorized: Invalid API Key
+1790017460.650160 host llama-server[17101]: 5419.43.974.604 W srv    operator(): unauthorized: Invalid API Key
+1790017460.652072 host llama-server[17101]: 5419.43.976.520 W srv    operator(): unauthorized: Invalid API Key
+1790017460.653370 host llama-server[17101]: 5419.43.977.816 W srv    operator(): unauthorized: Invalid API Key
+1790017460.654786 host llama-server[17101]: 5419.43.979.234 W srv    operator(): unauthorized: Invalid API Key
+1790017651.022295 host llama-server[17101]: 5422.54.346.539 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 1.000 (> 0.100 thold), f_keep = 0.356
+1790017651.024533 host llama-server[17101]: 5422.54.348.466 I slot launch_slot_: id  0 | task 471871 | processing task, is_child = 0
+1790017651.930736 host llama-server[17101]: 5422.55.255.159 I slot print_timing: id  0 | task 471871 | prompt eval time =     232.05 ms /     4 tokens (   58.01 ms per token,    17.24 tokens per second)
+1790017651.930736 host llama-server[17101]: 5422.55.255.165 I slot print_timing: id  0 | task 471871 |        eval time =     673.46 ms /    48 tokens (   14.33 ms per token,    69.79 tokens per second)
+1790017651.930736 host llama-server[17101]: 5422.55.255.166 I slot print_timing: id  0 | task 471871 |       total time =     905.51 ms /    52 tokens
+1790017651.930736 host llama-server[17101]: 5422.55.255.167 I slot print_timing: id  0 | task 471871 |    graphs reused =     144170
+1790017651.930736 host llama-server[17101]: 5422.55.255.172 I slot print_timing: id  0 | task 471871 | draft acceptance = 0.84615 (   33 accepted /    39 generated), mean len =  3.54
+1790017651.930736 host llama-server[17101]: 5422.55.255.217 I slot      release: id  0 | task 471871 | stop processing: n_tokens = 73, truncated = 0
+1790017981.013430 host llama-server[17101]: 5428.24.337.860 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 1.000 (> 0.100 thold), f_keep = 0.356
+1790017981.015605 host llama-server[17101]: 5428.24.338.761 I slot launch_slot_: id  0 | task 472217 | processing task, is_child = 0
+1790017981.906012 host llama-server[17101]: 5428.25.230.415 I slot print_timing: id  0 | task 472217 | prompt eval time =     217.39 ms /     4 tokens (   54.35 ms per token,    18.40 tokens per second)
+1790017981.906012 host llama-server[17101]: 5428.25.230.420 I slot print_timing: id  0 | task 472217 |        eval time =     673.07 ms /    48 tokens (   14.32 ms per token,    69.83 tokens per second)
+1790017981.906012 host llama-server[17101]: 5428.25.230.430 I slot print_timing: id  0 | task 472217 |       total time =     890.46 ms /    52 tokens
+1790017981.906012 host llama-server[17101]: 5428.25.230.431 I slot print_timing: id  0 | task 472217 |    graphs reused =     144182
+1790017981.906012 host llama-server[17101]: 5428.25.230.436 I slot print_timing: id  0 | task 472217 | draft acceptance = 0.84615 (   33 accepted /    39 generated), mean len =  3.54
+1790017981.906012 host llama-server[17101]: 5428.25.230.477 I slot      release: id  0 | task 472217 | stop processing: n_tokens = 73, truncated = 0
+1790018311.013594 host llama-server[17101]: 5433.54.337.984 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 1.000 (> 0.100 thold), f_keep = 0.356
+1790018311.015942 host llama-server[17101]: 5433.54.338.859 I slot launch_slot_: id  0 | task 472563 | processing task, is_child = 0
+1790018311.903888 host llama-server[17101]: 5433.55.228.324 I slot print_timing: id  0 | task 472563 | prompt eval time =     217.90 ms /     4 tokens (   54.48 ms per token,    18.36 tokens per second)
+1790018311.903998 host llama-server[17101]: 5433.55.228.329 I slot print_timing: id  0 | task 472563 |        eval time =     670.40 ms /    48 tokens (   14.26 ms per token,    70.11 tokens per second)
+1790018311.903998 host llama-server[17101]: 5433.55.228.330 I slot print_timing: id  0 | task 472563 |       total time =     888.30 ms /    52 tokens
+1790018311.903998 host llama-server[17101]: 5433.55.228.331 I slot print_timing: id  0 | task 472563 |    graphs reused =     144194
+1790018311.903998 host llama-server[17101]: 5433.55.228.336 I slot print_timing: id  0 | task 472563 | draft acceptance = 0.84615 (   33 accepted /    39 generated), mean len =  3.54
+1790018311.903998 host llama-server[17101]: 5433.55.228.388 I slot      release: id  0 | task 472563 | stop processing: n_tokens = 73, truncated = 0
+1790043773.481948 host llama-server[17101]: 5858.16.806.395 W srv         alloc:  - prompt state size 8873.434 MiB exceeds cache size limit 8192.000 MiB, skipping
+1790044100.684210 host llama-server[17101]: 5863.44.008.444 W srv          stop: cancel task, id_task = 511846
+1790044195.910502 host llama-server[17101]: 5865.19.234.950 W srv         alloc:  - prompt state size 8292.427 MiB exceeds cache size limit 8192.000 MiB, skipping
+1790052211.057705 host llama-server[17101]: 5998.54.381.914 W srv          stop: cancel task, id_task = 526744
+1790111307.749578 host llama-server[523500]: 0.00.132.225 I srv    load_model: loading model '/opt/models/Qwen3.8-27B-UD-Q8_K_XL.gguf'
+1790111333.490388 host llama-server[523500]: 0.25.873.066 I srv  llama_server: model loaded
+1790117358.931384 host llama-server[531675]: 0.00.199.590 I srv    load_model: loading model '/opt/models/Qwen3.8-27B-UD-Q8_K_XL.gguf'
+1790117385.793940 host llama-server[531675]: 0.27.062.095 I srv  llama_server: model loaded

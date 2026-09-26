@@ -1,0 +1,10 @@
+[Unit]
+Description=Poll InferenceInquire for alerts every minute
+
+[Timer]
+OnBootSec=2min
+OnUnitActiveSec=60s
+AccuracySec=5s
+
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,24 @@
+1790406749.947209 host llama-server[1]: 0.00.513.512 I srv    load_model: loading model '/models/Qwen3-0.6B-Q8_0.gguf'
+1790406791.528530 host llama-server[1]: 0.42.094.830 I srv  llama_server: model loaded
+1790406791.703047 host llama-server[1]: 0.42.269.159 I slot get_availabl: id  1 | task -1 | selected slot by LRU, t_last = -1
+1790406807.894690 host llama-server[1]: 0.58.460.949 I slot get_availabl: id  1 | task -1 | selected slot by LCP similarity, f_sim_best = 0.250 (> 0.100 thold), f_keep = 0.042
+1790406807.897750 host llama-server[1]: 0.58.464.034 I slot launch_slot_: id  1 | task 61 | processing task, is_child = 0
+1790406808.104510 host llama-server[1]: 0.58.670.763 I slot print_timing: id  1 | task 61 | prompt eval time =       7.98 ms /     9 tokens (    0.89 ms per token,  1127.25 tokens per second)
+1790406808.104545 host llama-server[1]: 0.58.670.767 I slot print_timing: id  1 | task 61 |        eval time =     198.72 ms /    60 tokens (    3.37 ms per token,   296.89 tokens per second)
+1790406808.104551 host llama-server[1]: 0.58.670.768 I slot print_timing: id  1 | task 61 |       total time =     206.71 ms /    69 tokens
+1790406808.104556 host llama-server[1]: 0.58.670.769 I slot print_timing: id  1 | task 61 |    graphs reused =        117
+1790406808.104587 host llama-server[1]: 0.58.670.785 I slot      release: id  1 | task 61 | stop processing: n_tokens = 71, truncated = 0
+1790406808.125574 host llama-server[1]: 0.58.691.858 I slot get_availabl: id  1 | task -1 | selected slot by LCP similarity, f_sim_best = 0.231 (> 0.100 thold), f_keep = 0.042
+1790406808.130053 host llama-server[1]: 0.58.696.354 I slot launch_slot_: id  1 | task 122 | processing task, is_child = 0
+1790406808.336157 host llama-server[1]: 0.58.902.409 I slot print_timing: id  1 | task 122 | prompt eval time =       8.03 ms /    10 tokens (    0.80 ms per token,  1246.11 tokens per second)
+1790406808.336190 host llama-server[1]: 0.58.902.417 I slot print_timing: id  1 | task 122 |        eval time =     198.01 ms /    60 tokens (    3.36 ms per token,   297.97 tokens per second)
+1790406808.336194 host llama-server[1]: 0.58.902.418 I slot print_timing: id  1 | task 122 |       total time =     206.03 ms /    70 tokens
+1790406808.336197 host llama-server[1]: 0.58.902.419 I slot print_timing: id  1 | task 122 |    graphs reused =        175
+1790406808.336200 host llama-server[1]: 0.58.902.439 I slot      release: id  1 | task 122 | stop processing: n_tokens = 72, truncated = 0
+1790406808.357336 host llama-server[1]: 0.58.923.608 I slot get_availabl: id  1 | task -1 | selected slot by LCP similarity, f_sim_best = 0.250 (> 0.100 thold), f_keep = 0.042
+1790406808.360694 host llama-server[1]: 0.58.927.015 I slot launch_slot_: id  1 | task 183 | processing task, is_child = 0
+1790406808.565929 host llama-server[1]: 0.59.132.162 I slot print_timing: id  1 | task 183 | prompt eval time =       7.99 ms /     9 tokens (    0.89 ms per token,  1126.41 tokens per second)
+1790406808.565962 host llama-server[1]: 0.59.132.167 I slot print_timing: id  1 | task 183 |        eval time =     197.13 ms /    60 tokens (    3.34 ms per token,   299.29 tokens per second)
+1790406808.565967 host llama-server[1]: 0.59.132.169 I slot print_timing: id  1 | task 183 |       total time =     205.12 ms /    69 tokens
+1790406808.565970 host llama-server[1]: 0.59.132.169 I slot print_timing: id  1 | task 183 |    graphs reused =        233
+1790406808.565973 host llama-server[1]: 0.59.132.187 I slot      release: id  1 | task 183 | stop processing: n_tokens = 71, truncated = 0

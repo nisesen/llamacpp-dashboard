@@ -1,0 +1,10 @@
+[Unit]
+Description=Forward InferenceInquire alerts to a chat
+After=network-online.target
+
+[Service]
+Type=oneshot
+# DASH_URL and DASH_SEND live here, not in the unit or the script.
+EnvironmentFile=%h/.config/dash-alerts.env
+ExecStart=/usr/bin/python3 %h/.local/bin/dash-alerts.py
+TimeoutStartSec=120

@@ -1,0 +1,19 @@
+name: Feature request
+description: Something you would like it to show or do.
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What would you like to see, and what problem does it solve?
+    validations:
+      required: true
+  - type: textarea
+    id: setup
+    attributes:
+      label: Your setup
+      description: Where llama.cpp runs, the GPUs, and how InferenceInquire is installed.
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Anything you have tried or considered

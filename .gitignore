@@ -1,0 +1,15 @@
+# Runtime state and build output, not source
+data/
+dist/
+.env
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# macOS
+.DS_Store
+._*
+# Site-specific settings; see README "Configuration".
+site.env
